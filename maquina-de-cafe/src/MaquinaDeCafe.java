@@ -43,63 +43,116 @@
 
 import java.util.Scanner;
 
+import static java.lang.System.*;
+
 public  class MaquinaDeCafe {
 
 
+
      public static void selecionaProduto(String s ) {
-     switch (s) {
+         s = s.toUpperCase();
+         switch (s) {
 
-          case "a50": System.out.println("O produto escolhido foi Cappuccino. \n Insira R$ 4,50");
-          break;
+             case "A50":
+                 out.println(CardapioEnum.CAPPUCCINO.opcaoeEscolhida());
+                 break;
 
-          case "b40": System.out.println("O produto escolhido foi Vanilla. \n Insira R$ 5,00");
-          break;
+             case "B40":
+                 out.println(CardapioEnum.VANILLA.opcaoeEscolhida());
+                 break;
 
-         case "a60": System.out.println("O produto escolhido Mocaccino. \n Insira R$ 3,75");
-         break;
+             case "A60":
+                 out.println(CardapioEnum.MOCACCINO.opcaoeEscolhida());
+                 break;
 
-         case "m20": System.out.println("O produto escolhido Carioca. \n Insira R$ 2,20");
-         break;
+             case "M20":
+                 out.println(CardapioEnum.CARIOCA.opcaoeEscolhida());
+                 break;
 
-         case "c10": System.out.println("O produto escolhido Chocolate quente. \n Insira R$ 8,40");
-         break;
+             case "C10":
+                 out.println(CardapioEnum.CHOCOLATE_QUENTE.opcaoeEscolhida());
+                 break;
 
-         case "0": System.out.println("Finalizando ...");
-         break;
-         
-      default:System.out.println("Código de produto inválido. \n Digite novamente ou digite 0 para sair.  ");
-          Scanner sc = new Scanner(System.in);
-          String Codigodoproduto = sc.next();
-          selecionaProduto(Codigodoproduto);
+             case "0":
+                 out.println("Finalizando ...");
+                 exit(0);
+                 return;
+
+
+             default:
+                 out.println("Código de produto inválido. \n Digite novamente ou digite 0 para sair.  ");
+                 Scanner sc = new Scanner(in);
+                 String Codigodoproduto = sc.next();
+                 selecionaProduto(Codigodoproduto);
+
+         }
+
+
 
      }
 
+     public static double produto(String codproduto) {
+         String prod = codproduto.toUpperCase();
+         double valor = 0;
+
+         if (prod.equals(CardapioEnum.CAPPUCCINO.getCodigo())) {
+             valor = 4.50;
+             return valor;
+         }
+
+         if (prod.equals(CardapioEnum.VANILLA.getCodigo())) {
+             valor = 5.00;
+             return valor;
+         }
+
+         if (prod.equals (CardapioEnum.MOCACCINO.getCodigo())) {
+             valor = 3.75;
+
+             return valor;
+         }
+
+         if (prod.equals (CardapioEnum.CARIOCA.getCodigo())) {
+             valor = 2.20;
+             return valor;
+         }
+
+         if (prod.equals (CardapioEnum.CHOCOLATE_QUENTE.getCodigo())) {
+             valor = 8.40;
+             return valor;
+          }
+           else{
+             return valor;
+          }
 
 
+     }
 
-}
+    public static void calculatroco(Double valortroco){
+
+
+    }
 
 
  public static void MenuPrincipal() {
 
 
-      System.out.println("Escolha a bebida de sua preferência: \n ");
+      out.println("Escolha a bebida de sua preferência: \n ");
 
-      System.out.println("_____________________________________________________________________");
+      out.println("____________________________________________________________________________");
 
-      System.out.println("| Código Produto |             Produto                  |   Valor   |");
+      out.println("| Código Produto |   Valor   |             Produto                         |");
 
-      System.out.println("|      A50       |            Cappuccino                |  R$ 4,50  |");
+      out.println(CardapioEnum.CAPPUCCINO.opacaoCardapio() +"       |");
 
-      System.out.println("|      B40       |             Vanilla                  |  R$ 5,00  |");
+      out.println(CardapioEnum.VANILLA.opacaoCardapio()+"         |");
 
-      System.out.println("|      A60       |            Mocaccino                 |  R$ 3,75  |");
+      out.println(CardapioEnum.MOCACCINO.opacaoCardapio()+"       |");
 
-      System.out.println("|      M20       |             Carioca                  |  R$ 2,20  |");
+      out.println(CardapioEnum.CARIOCA.opacaoCardapio()+"         |");
 
-      System.out.println("|      C10       |         Chocolate quente             |  R$ 8,40  |");
+      out.println(CardapioEnum.CHOCOLATE_QUENTE.opacaoCardapio()+"|");
 
-      System.out.println("|___________________________________________________________________| \n");
+      out.println("|__________________________________________________________________________| \n");
 
      }
 
@@ -108,14 +161,18 @@ public  class MaquinaDeCafe {
 
 
       MenuPrincipal();
-          Scanner sc = new Scanner(System.in);
-          System.out.println("Digite codigo do produto: ");
+          Scanner sc = new Scanner(in);
+          out.println("Digite codigo do produto: ");
           String Codigodoproduto = sc.next();
           selecionaProduto(Codigodoproduto);
+          double preco = produto(Codigodoproduto);
+          System.out.println(produto(Codigodoproduto));
 
-          Scanner scv = new Scanner(System.in);
+
+          Scanner scv = new Scanner(in);
           String valorInserido = String.valueOf(scv.next());
-
+          out.println(valorInserido);
+          out.println(produto(Codigodoproduto));
 
 
 
