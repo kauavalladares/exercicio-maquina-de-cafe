@@ -40,56 +40,58 @@
 //               2 moedas de 10
 //______________________________________________________________________________________________________________________
 
-
 import java.util.Scanner;
 
 import static java.lang.System.*;
 
-public  class MaquinaDeCafe {
+public  class MaquinaDeCafe extends DevolveTroco {
 
 
+    public boolean checaProdutovalido(String codproduto){
+       codproduto  = codproduto.toUpperCase();
 
-     public static void selecionaProduto(String s ) {
+
+        return false;
+    }
+    public static String selecionaProduto(String s) {
          s = s.toUpperCase();
          switch (s) {
-
-             case "A50":
+             case "A50" -> {
                  out.println(CardapioEnum.CAPPUCCINO.opcaoeEscolhida());
-                 break;
-
-             case "B40":
+                 s = CardapioEnum.CAPPUCCINO.getNome();
+             }
+             case "B40" -> {
                  out.println(CardapioEnum.VANILLA.opcaoeEscolhida());
-                 break;
-
-             case "A60":
+                 s = CardapioEnum.VANILLA.getNome();
+             }
+             case "A60" -> {
                  out.println(CardapioEnum.MOCACCINO.opcaoeEscolhida());
-                 break;
-
-             case "M20":
+                 s = CardapioEnum.MOCACCINO.getNome();
+             }
+             case "M20" -> {
                  out.println(CardapioEnum.CARIOCA.opcaoeEscolhida());
-                 break;
-
-             case "C10":
+                 s = CardapioEnum.CARIOCA.getNome();
+             }
+             case "C10" -> {
                  out.println(CardapioEnum.CHOCOLATE_QUENTE.opcaoeEscolhida());
-                 break;
-
-             case "0":
+                 s = CardapioEnum.CHOCOLATE_QUENTE.getNome();
+             }
+             case "0" -> {
                  out.println("Finalizando ...");
                  exit(0);
-                 return;
-
-
-             default:
+             }
+             default -> {
                  out.println("Código de produto inválido. \n Digite novamente ou digite 0 para sair.  ");
                  Scanner sc = new Scanner(in);
-                 String Codigodoproduto = sc.next();
-                 selecionaProduto(Codigodoproduto);
-
+                 s = sc.next();
+                 selecionaProduto(s);
+                 produto(s);
+             }
          }
 
 
-
-     }
+        return s;
+    }
 
      public static double produto(String codproduto) {
          String prod = codproduto.toUpperCase();
@@ -107,7 +109,6 @@ public  class MaquinaDeCafe {
 
          if (prod.equals (CardapioEnum.MOCACCINO.getCodigo())) {
              valor = 3.75;
-
              return valor;
          }
 
@@ -119,18 +120,12 @@ public  class MaquinaDeCafe {
          if (prod.equals (CardapioEnum.CHOCOLATE_QUENTE.getCodigo())) {
              valor = 8.40;
              return valor;
-          }
-           else{
-             return valor;
-          }
+         }
 
-
+         return valor;
      }
 
-    public static void calculatroco(Double valortroco){
 
-
-    }
 
 
  public static void MenuPrincipal() {
@@ -156,26 +151,32 @@ public  class MaquinaDeCafe {
 
      }
 
+
+
      public static void main(String[] args) {
 
 
+         MenuPrincipal();
+         Scanner sc = new Scanner(in);
+         out.println("Digite codigo do produto: ");
+         String Codigodoproduto = sc.next();
 
-      MenuPrincipal();
-          Scanner sc = new Scanner(in);
-          out.println("Digite codigo do produto: ");
-          String Codigodoproduto = sc.next();
-          selecionaProduto(Codigodoproduto);
-          double preco = produto(Codigodoproduto);
-          System.out.println(produto(Codigodoproduto));
+         String bebida = selecionaProduto(Codigodoproduto);
+         double preco = produto(bebida);
 
 
-          Scanner scv = new Scanner(in);
-          String valorInserido = String.valueOf(scv.next());
-          out.println(valorInserido);
-          out.println(produto(Codigodoproduto));
+         Scanner scv = new Scanner(in);
+         double valorInserido = scv.nextDouble();
+
+        out.println(calculaTroco(preco,valorInserido));
+        out.println("Sua está bebida sendo preparada aguarde! \n");
+        out.println("aqui está sua bebida: " + bebida + " ☕︎");
+
+
 
 
 
 
      }
 }
+
